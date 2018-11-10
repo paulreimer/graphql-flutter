@@ -11,6 +11,7 @@ class Client {
     String endPoint = '',
     InMemoryCache cache,
     String apiToken,
+    String authorization
   }) {
     assert(endPoint != null);
     assert(cache != null);
@@ -18,6 +19,7 @@ class Client {
     this.endPoint = endPoint;
     this.cache = cache;
     this.apiToken = apiToken;
+    this.authorization = authorization;
     this.client = http.Client();
   }
 
@@ -36,6 +38,10 @@ class Client {
     _apiToken = value;
   }
 
+  set authorization(String value) {
+    _authorization = value;
+  }
+
   set cache(InMemoryCache cache) {
     _cache = cache;
   }
@@ -45,8 +51,10 @@ class Client {
 
   String get apiToken => this._apiToken;
 
+  String get authorization => this._authorization;
+
   Map<String, String> get headers => {
-        'Authorization': 'Bearer $apiToken',
+        'Authorization': authorization != null? authorization : 'Bearer $apiToken',
         'Content-Type': 'application/json',
       };
 
