@@ -25,6 +25,7 @@ class Client {
 
   String _endpoint;
   String _apiToken;
+  String _authorization;
   InMemoryCache _cache;
 
   http.Client client;
